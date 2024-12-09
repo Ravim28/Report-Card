@@ -1,11 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { Navigate } from 'react-router-dom';
 
-function Protectedroute() {
-  return (
-    <div>
-      <h1>Protectedroute</h1>
-    </div>
-  )
-}
+const ProtectedRoute = ({ children, role }) => {
+  const storedRole = localStorage.getItem('role'); // Retrieve the role from localStorage
 
-export default Protectedroute
+  // Check if the user is logged in and has the correct role
+  if (!storedRole || storedRole !== role) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+};
+
+export default ProtectedRoute;

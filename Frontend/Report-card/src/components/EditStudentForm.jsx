@@ -247,7 +247,7 @@ const EditStudentForm = () => {
       navigate('/teacher-dashboard/manage-students');
     } catch (error) {
       console.error('Error updating student:', error);
-      alert('Failed to update student. Please try again.');
+      alert('This email is already in use');
     }
   };
 

@@ -1,174 +1,20 @@
-// import React, { useRef, useEffect } from 'react';
+
+
+// import React, { useState, useEffect } from 'react';
 // import { useNavigate } from 'react-router-dom';
 // import axios from 'axios';
 
 // const StudentTable = () => {
-//   const dataRef = useRef([]);
+//   const [data, setData] = useState([]); // To store all fetched data
+//   const [filteredData, setFilteredData] = useState([]); // To store filtered data
+//   const [searchQuery, setSearchQuery] = useState(''); // To store the search query
 //   const navigate = useNavigate();
-//   const tableRef = useRef();
-
-//   const renderTable = () => {
-//     const tableBody = tableRef.current;
-//     tableBody.innerHTML = ''; // Clear current table rows
-
-//     dataRef.current.forEach((item, index) => {
-//       const row = document.createElement('tr');
-//       row.className = index % 2 === 0 ? 'bg-white' : 'bg-gray-100'; // Alternate row colors
-//       row.innerHTML = `
-//         <td class="border px-2 py-3 text-center">${item.id}</td>
-//         <td class="border px-2 py-3 text-center">${item.name}</td>
-//         <td class="border px-2 py-3 text-center">${item.fatherName}</td>
-//         <td class="border px-2 py-3 text-center">${item.motherName}</td>
-//         <td class="border px-2 py-3 text-center">${item.email}</td>
-//         <td class="border px-2 py-3 text-center">${item.phone}</td>
-//         <td class="border px-2 py-3 text-center">${item.gender}</td>
-//         <td class="border px-2 py-3 text-center">${item.address}</td>
-//         <td class="border px-2 py-3 text-center">${item.course}</td>
-//         <td class="border px-2 py-3 text-center">${item.year}</td>
-//         <td class="border px-2 py-3">
-//           <div class="flex justify-around space-x-2">
-//             <button class="bg-yellow-500 text-white px-2 py-1 rounded-md hover:bg-yellow-600 transition duration-200">Edit</button>
-//             <button class="bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-600 transition duration-200">Delete</button>
-//           </div>
-//         </td>
-//       `;
-//       tableBody.appendChild(row);
-
-//       row.querySelector('.bg-yellow-500').addEventListener('click', () => editData(item));
-//       row.querySelector('.bg-red-500').addEventListener('click', () => deleteData(item.id));
-//     });
-//   };
-
-//   const fetchData = async () => {
-//     const result = await axios.get('http://localhost:5000/api/data');
-//     dataRef.current = result.data;
-//     renderTable();
-//   };
-
-//   const deleteData = async (id) => {
-//     await axios.delete(`http://localhost:5000/api/data/${id}`);
-//     fetchData();
-//   };
-
-//   const editData = (student) => {
-//     navigate('/edit-student', { state: { student } });
-//   };
-
-//   useEffect(() => {
-//     fetchData();
-//   }, []);
-
-//   return (
-//     <div className="max-w-7xl mx-auto mt-10 p-4 sm:p-6 bg-white rounded-lg">
-//       <h1 className="text-2xl font-bold text-center text-orange-600 mb-6">Student List</h1>
-//       <div className="overflow-x-auto">
-//         <table className="table-auto w-full text-xs sm:text-sm">
-//           <thead>
-//             <tr className="bg-gray-200 text-gray-700">
-//               <th className="px-2 py-3 text-center">ID</th>
-//               <th className="px-2 py-3 text-center">Name</th>
-//               <th className="px-2 py-3 text-center">Father Name</th>
-//               <th className="px-2 py-3 text-center">Mother Name</th>
-//               <th className="px-2 py-3 text-center">Email</th>
-//               <th className="px-2 py-3 text-center">Contact No.</th>
-//               <th className="px-2 py-3 text-center">Gender</th>
-//               <th className="px-2 py-3 text-center">Address</th>
-//               <th className="px-2 py-3 text-center">Course</th>
-//               <th className="px-2 py-3 text-center">Year</th>
-//               <th className="px-2 py-3 text-center">Actions</th>
-//             </tr>
-//           </thead>
-//           <tbody ref={tableRef}></tbody>
-//         </table>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default StudentTable;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React, { useRef, useEffect } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import axios from 'axios';
-
-// const StudentTable = () => {
-//   const dataRef = useRef([]);
-//   const navigate = useNavigate();
-//   const tableRef = useRef();
-
-//   const renderTable = () => {
-//     const tableBody = tableRef.current;
-//     tableBody.innerHTML = ''; // Clear current table rows
-
-//     // Extract unique keys dynamically from the first item
-//     const fields = dataRef.current.length > 0 ? Object.keys(dataRef.current[0]) : [];
-
-//     dataRef.current.forEach((item, index) => {
-//       const row = document.createElement('tr');
-//       row.className = index % 2 === 0 ? 'bg-white' : 'bg-gray-100'; // Alternate row colors
-
-//       fields.forEach((field) => {
-//         const cell = document.createElement('td');
-//         cell.className = 'border px-2 py-3 text-center';
-//         cell.textContent = item[field];
-//         row.appendChild(cell);
-//       });
-
-//       // Add action buttons
-//       const actionCell = document.createElement('td');
-//       actionCell.className = 'border px-2 py-3';
-//       actionCell.innerHTML = `
-//         <div class="flex justify-around space-x-2">
-//           <button class="bg-yellow-500 text-white px-2 py-1 rounded-md hover:bg-yellow-600 transition duration-200">Edit</button>
-//           <button class="bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-600 transition duration-200">Delete</button>
-//         </div>
-//       `;
-//       row.appendChild(actionCell);
-
-//       actionCell.querySelector('.bg-yellow-500').addEventListener('click', () => editData(item));
-//       actionCell.querySelector('.bg-red-500').addEventListener('click', () => deleteData(item.id));
-
-//       tableBody.appendChild(row);
-//     });
-
-//     // Update the table headers
-//     const headerRow = document.querySelector('#table-headers');
-//     headerRow.innerHTML = ''; // Clear existing headers
-//     fields.forEach((field) => {
-//       const header = document.createElement('th');
-//       header.className = 'px-2 py-3 text-center';
-//       header.textContent = field.charAt(0).toUpperCase() + field.slice(1); // Capitalize field names
-//       headerRow.appendChild(header);
-//     });
-
-//     // Add a header for actions
-//     const actionHeader = document.createElement('th');
-//     actionHeader.className = 'px-2 py-3 text-center';
-//     actionHeader.textContent = 'Actions';
-//     headerRow.appendChild(actionHeader);
-//   };
 
 //   const fetchData = async () => {
 //     try {
 //       const result = await axios.get('http://localhost:5000/api/data');
-//       dataRef.current = result.data;
-//       renderTable();
+//       setData(result.data);
+//       setFilteredData(result.data); // Initialize with full data
 //     } catch (error) {
 //       console.error('Error fetching data:', error);
 //     }
@@ -184,7 +30,17 @@
 //   };
 
 //   const editData = (student) => {
-//     navigate('/edit-student', { state: { student } });
+//     navigate('/edit-students', { state: { student } });
+//   };
+
+//   const handleSearch = (e) => {
+//     const query = e.target.value.toLowerCase();
+//     setSearchQuery(query);
+
+//     const filtered = data.filter((student) =>
+//       student.name.toLowerCase().includes(query)
+//     );
+//     setFilteredData(filtered);
 //   };
 
 //   useEffect(() => {
@@ -192,14 +48,96 @@
 //   }, []);
 
 //   return (
-//     <div className="max-w-7xl mx-auto mt-10 p-4 sm:p-6 bg-white rounded-lg">
-//       <h1 className="text-2xl font-bold text-center text-orange-600 mb-6">Student List</h1>
+//     <div className="max-w-7xl mx-auto p-4 sm:p-6 bg-white rounded-lg shadow-lg">
+//       <h1 className="text-2xl sm:text-3xl font-bold text-orange-600 text-center mb-6">
+//         Student List
+//       </h1>
+
+//       {/* Search Input */}
+//       <div className="mb-4 flex justify-end">
+//         <input
+//           type="text"
+//           placeholder="Search by Name"
+//           value={searchQuery}
+//           onChange={handleSearch}
+//           className="p-2 border border-gray-300 rounded w-full max-w-xs"
+//         />
+//       </div>
+
+//       {/* Responsive Table */}
 //       <div className="overflow-x-auto">
-//         <table className="table-auto w-full text-xs sm:text-sm">
-//           <thead>
-//             <tr id="table-headers" className="bg-gray-200 text-gray-700"></tr>
+//         <table className="table-auto min-w-full bg-white border border-gray-200 text-sm">
+//           <thead >
+//             <tr>
+//               <th className="py-2 px-4 border text-center">Name</th>
+//               <th className="py-2 px-4 border text-center">Father Name</th>
+//               <th className="py-2 px-4 border text-center">Father Email</th>
+//               <th className="py-2 px-4 border text-center">Mother Name</th>
+//               <th className="py-2 px-4 border text-center">Student Email</th>
+//               <th className="py-2 px-4 border text-center">Contact No.</th>
+//               <th className="py-2 px-4 border text-center">Other Contact No.</th>
+//               <th className="py-2 px-4 border text-center">Gender</th>
+//               <th className="py-2 px-4 border text-center">Address</th>
+//               <th className="py-2 px-4 border text-center">Roll Number</th>
+//               <th className="py-2 px-4 border text-center">Course</th>
+//               <th className="py-2 px-4 border text-center">Year</th>
+//               <th className="px-2 py-4 border text-center">Total Present days</th>
+//               <th className="px-2 py-4 border text-center">Total Absent days</th>
+//               <th className="px-2 py-4 border text-center">Total days</th>
+//               <th className="py-2 px-4 border text-center">Attendance %</th>
+//               <th className="px-2 border py-4 text-center">1A Level</th>
+//               <th className="px-2 border py-4 text-center">1B Level</th>
+//               <th className="px-2 border py-4 text-center">1C Level</th>
+//               <th className="px-2 border py-4 text-center">2A Level</th>
+//               <th className="px-2 border py-4 text-center">2B Level</th>
+//               <th className="px-2 border py-4 text-center">2C Level</th>
+//               <th className="py-2 px-4 border text-center">Actions</th>
+//             </tr>
 //           </thead>
-//           <tbody ref={tableRef}></tbody>
+//           <tbody>
+//             {filteredData.map((student) => (
+//               <tr key={student.id} className="hover:bg-gray-100">
+//                 <td className="py-3 px-2 border text-center">{student.name}</td>
+//                 <td className="py-3 px-2 border text-center">{student.fatherName}</td>
+//                 <td className="py-3 px-2 border text-center">{student.fatheremail}</td>
+//                 <td className="py-3 px-2 border text-center">{student.motherName}</td>
+//                 <td className="py-3 px-2 border text-center">{student.email}</td>
+//                 <td className="py-3 px-2 border text-center">{student.phone}</td>
+//                 <td className="py-3 px-2 border text-center">{student.otherPhone}</td>
+//                 <td className="py-3 px-2 border text-center">{student.gender}</td>
+//                 <td className="py-3 px-2 border text-center">{student.address}</td>
+//                 <td className="py-3 px-2 border text-center">{student.rollno}</td>
+//                 <td className="py-3 px-2 border text-center">{student.course}</td>
+//                 <td className="py-3 px-2 border text-center">{student.year}</td>
+//                 <td className="border px-2 py-3 text-center">{student.totalpresent}</td>
+//                 <td className="border px-2 py-3 text-center">{student.totalabsent}</td>
+//                 <td className="border px-2 py-3 text-center">{student.totalday}</td>
+//                 <td className="py-3 px-2 border text-center">{student.attenpercentage}</td>
+//                 <td className="border px-2 py-3 text-center">{student.oneA}</td>
+//                 <td className="border px-2 py-3 text-center">{student.oneB}</td>
+//                 <td className="border px-2 py-3 text-center">{student.oneC}</td>
+//                 <td className="border px-2 py-3 text-center">{student.twoA}</td>
+//                 <td className="border px-2 py-3 text-center">{student.twoB}</td>
+//                 <td className="border px-2 py-3 text-center">{student.twoC}</td>
+//                 <td className="py-3 px-2 border text-center">
+//                   <div className="flex justify-around space-x-2">
+//                     <button
+//                       onClick={() => editData(student)}
+//                       className="bg-yellow-500 text-white px-2 py-1 rounded-md hover:bg-yellow-600 transition duration-200 text-xs sm:text-sm"
+//                     >
+//                       Edit
+//                     </button>
+//                     <button
+//                       onClick={() => deleteData(student.id)}
+//                       className="bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-600 transition duration-200 text-xs sm:text-sm"
+//                     >
+//                       Delete
+//                     </button>
+//                   </div>
+//                 </td>
+//               </tr>
+//             ))}
+//           </tbody>
 //         </table>
 //       </div>
 //     </div>
@@ -213,153 +151,162 @@
 
 
 
+// m
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React, { useRef, useEffect, useState } from 'react';
-// import { useNavigate, useParams } from 'react-router-dom';
-// import axios from 'axios';
+// import React, { useState, useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
+// import axios from "axios";
 
 // const StudentTable = () => {
-//   const dataRef = useRef([]);
-//   const tableRef = useRef();
+//   const [data, setData] = useState([]); // Store all fetched data
+//   const [filteredData, setFilteredData] = useState([]); // Store filtered data
+//   const [searchQuery, setSearchQuery] = useState(""); // Search query
+//   const [selectedStudent, setSelectedStudent] = useState(null); // For modal view
 //   const navigate = useNavigate();
-//   const { searchQuery } = useParams(); // Get searchQuery from URL parameters
-//   const [searchInput, setSearchInput] = useState(searchQuery || ''); // Controlled input for search field
 
-//   // Render table rows dynamically
-//   const renderTable = () => {
-//     const tableBody = tableRef.current;
-//     tableBody.innerHTML = ''; // Clear existing rows
-
-//     const fields = dataRef.current.length > 0 ? Object.keys(dataRef.current[0]) : [];
-
-//     dataRef.current.forEach((item, index) => {
-//       const row = document.createElement('tr');
-//       row.className = index % 2 === 0 ? 'bg-white' : 'bg-gray-100';
-
-//       fields.forEach((field) => {
-//         const cell = document.createElement('td');
-//         cell.className = 'border px-2 py-3 text-center';
-//         cell.textContent = item[field];
-//         row.appendChild(cell);
-//       });
-
-//       // Action buttons
-//       const actionCell = document.createElement('td');
-//       actionCell.className = 'border px-2 py-3';
-//       actionCell.innerHTML = `
-//         <div class="flex justify-around space-x-2">
-//           <button class="bg-yellow-500 text-white px-2 py-1 rounded-md hover:bg-yellow-600 transition duration-200">Edit</button>
-//           <button class="bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-600 transition duration-200">Delete</button>
-//         </div>
-//       `;
-//       row.appendChild(actionCell);
-
-//       actionCell.querySelector('.bg-yellow-500').addEventListener('click', () => editData(item));
-//       actionCell.querySelector('.bg-red-500').addEventListener('click', () => deleteData(item.id));
-
-//       tableBody.appendChild(row);
-//     });
-
-//     const headerRow = document.querySelector('#table-headers');
-//     headerRow.innerHTML = '';
-//     fields.forEach((field) => {
-//       const header = document.createElement('th');
-//       header.className = 'px-2 py-3 text-center';
-//       header.textContent = field.charAt(0).toUpperCase() + field.slice(1);
-//       headerRow.appendChild(header);
-//     });
-
-//     const actionHeader = document.createElement('th');
-//     actionHeader.className = 'px-2 py-3 text-center';
-//     actionHeader.textContent = 'Actions';
-//     headerRow.appendChild(actionHeader);
-//   };
-
-//   // Fetch data from the server
 //   const fetchData = async () => {
 //     try {
-//       const result = await axios.get(`http://localhost:5000/api/data/${searchQuery || ''}`);
-//       console.log('API Response:', result.data); // Debugging
-//       dataRef.current = result.data;
-//       renderTable();
+//       const result = await axios.get("http://localhost:5000/api/data");
+//       setData(result.data);
+//       setFilteredData(result.data); // Initialize with full data
 //     } catch (error) {
-//       console.error('Error fetching data:', error);
+//       console.error("Error fetching data:", error);
 //     }
 //   };
 
-//   // Delete data entry
 //   const deleteData = async (id) => {
 //     try {
 //       await axios.delete(`http://localhost:5000/api/data/${id}`);
 //       fetchData();
 //     } catch (error) {
-//       console.error('Error deleting data:', error);
+//       console.error("Error deleting data:", error);
 //     }
 //   };
 
-//   // Edit data entry
 //   const editData = (student) => {
-//     navigate('/edit-student', { state: { student } });
+//     navigate("/edit-students", { state: { student } });
 //   };
 
-//   // Handle search input change
-//   const handleSearch = (event) => {
-//     setSearchInput(event.target.value);
+//   const handleSearch = (e) => {
+//     const query = e.target.value.toLowerCase();
+//     setSearchQuery(query);
+
+//     const filtered = data.filter((student) =>
+//       student.name.toLowerCase().includes(query)
+//     );
+//     setFilteredData(filtered);
 //   };
 
-//   // Submit search query
-//   const handleSearchSubmit = (event) => {
-//     event.preventDefault();
-//     navigate(`/students/${searchInput}`);
+//   const handleViewDetails = (student) => {
+//     setSelectedStudent(student);
 //   };
 
-//   // Fetch data when searchQuery changes
+//   const handleCloseDetails = () => {
+//     setSelectedStudent(null);
+//   };
+
 //   useEffect(() => {
 //     fetchData();
-//   }, [searchQuery]);
+//   }, []);
 
 //   return (
-//     <div className="max-w-7xl mx-auto mt-10 p-4 sm:p-6 bg-white rounded-lg">
-//       <h1 className="text-2xl font-bold text-center text-orange-600 mb-6">Student List</h1>
+//     <div className="max-w-7xl mx-auto p-4 sm:p-6 bg-gray-100">
+//       <h1 className="text-2xl sm:text-3xl font-bold text-orange-600 text-center mb-6">
+//         Student List
+//       </h1>
 
-//       {/* Search Field */}
-//       <form onSubmit={handleSearchSubmit} className="flex justify-center mb-6">
+//       {/* Search Input */}
+//       <div className="mb-4 flex justify-end">
 //         <input
 //           type="text"
-//           placeholder="Search by name, class, or other details"
-//           value={searchInput}
+//           placeholder="Search by Name"
+//           value={searchQuery}
 //           onChange={handleSearch}
-//           className="w-full max-w-md border px-3 py-2 rounded-l-md text-gray-700 focus:outline-none focus:ring focus:border-blue-500"
+//           className="p-2 border border-gray-300 rounded w-full max-w-xs"
 //         />
-//         <button
-//           type="submit"
-//           className="bg-blue-500 text-white px-4 py-2 rounded-r-md hover:bg-blue-600 transition duration-200"
-//         >
-//           Search
-//         </button>
-//       </form>
-
-//       <div className="overflow-x-auto">
-//         <table className="table-auto w-full text-xs sm:text-sm">
-//           <thead>
-//             <tr id="table-headers" className="bg-gray-200 text-gray-700"></tr>
-//           </thead>
-//           <tbody ref={tableRef}></tbody>
-//         </table>
 //       </div>
+
+//       {/* Card View */}
+//       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+//         {filteredData.map((student) => (
+//           <div
+//             key={student.id}
+//             className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition duration-300"
+//           >
+//             <h2 className="text-lg font-semibold text-gray-800 mb-2">
+//               {student.name}
+//             </h2>
+//             <p className="text-sm text-gray-600">Roll No: {student.rollno}</p>
+//             <p className="text-sm text-gray-600">Email: {student.email}</p>
+//             <p className="text-sm text-gray-600">Course: {student.course}</p>
+
+//             <div className="flex justify-between mt-4">
+//               <button
+//                 onClick={() => handleViewDetails(student)}
+//                 className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 text-sm"
+//               >
+//                 View
+//               </button>
+//               <button
+//                 onClick={() => editData(student)}
+//                 className="bg-yellow-500 text-white px-3 py-1 rounded-md hover:bg-yellow-600 text-sm"
+//               >
+//                 Edit
+//               </button>
+//               <button
+//                 onClick={() => deleteData(student.id)}
+//                 className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 text-sm"
+//               >
+//                 Delete
+//               </button>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+
+//       {/* Modal for Viewing Details */}
+//       {selectedStudent && (
+//         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+//           <div className="bg-white p-6 rounded-lg shadow-lg w-11/12 max-w-2xl">
+//             <h2 className="text-2xl font-bold text-gray-800 mb-4">
+//               {selectedStudent.name}'s Details
+//             </h2>
+//             <p className="text-sm text-gray-600 mb-2">
+//               Father Name: {selectedStudent.fatherName}
+//             </p>
+//             <p className="text-sm text-gray-600 mb-2">
+//               Mother Name: {selectedStudent.motherName}
+//             </p>
+//             <p className="text-sm text-gray-600 mb-2">
+//               Roll No: {selectedStudent.rollno}
+//             </p>
+//             <p className="text-sm text-gray-600 mb-2">
+//               Email: {selectedStudent.email}
+//             </p>
+//             <p className="text-sm text-gray-600 mb-2">
+//               Contact No: {selectedStudent.phone}
+//             </p>
+//             <p className="text-sm text-gray-600 mb-2">
+//               Address: {selectedStudent.address}
+//             </p>
+//             <p className="text-sm text-gray-600 mb-2">
+//               Course: {selectedStudent.course}
+//             </p>
+//             <p className="text-sm text-gray-600 mb-2">
+//               Year: {selectedStudent.year}
+//             </p>
+
+//             <div className="flex justify-end mt-4">
+//               <button
+//                 onClick={handleCloseDetails}
+//                 className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 text-sm"
+//               >
+//                 Close
+//               </button>
+//             </div>
+//           </div>
+//         </div>
+//       )}
 //     </div>
 //   );
 // };
@@ -368,23 +315,28 @@
 
 
 
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+
+
+
+
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const StudentTable = () => {
-  const [data, setData] = useState([]); // To store all fetched data
-  const [filteredData, setFilteredData] = useState([]); // To storefiltered data
-  const [searchQuery, setSearchQuery] = useState(''); // To store thesearch query
+  const [data, setData] = useState([]); // Store all fetched data
+  const [filteredData, setFilteredData] = useState([]); // Store filtered data
+  const [searchQuery, setSearchQuery] = useState(""); // Search query
+  const [selectedStudent, setSelectedStudent] = useState(null); // For modal view
   const navigate = useNavigate();
 
   const fetchData = async () => {
     try {
-      const result = await axios.get('http://localhost:5000/api/data');
+      const result = await axios.get("http://localhost:5000/api/data");
       setData(result.data);
       setFilteredData(result.data); // Initialize with full data
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error("Error fetching data:", error);
     }
   };
 
@@ -393,12 +345,12 @@ const StudentTable = () => {
       await axios.delete(`http://localhost:5000/api/data/${id}`);
       fetchData();
     } catch (error) {
-      console.error('Error deleting data:', error);
+      console.error("Error deleting data:", error);
     }
   };
 
   const editData = (student) => {
-    navigate('/edit-students', { state: { student } });
+    navigate("/edit-students", { state: { student } });
   };
 
   const handleSearch = (e) => {
@@ -411,14 +363,23 @@ const StudentTable = () => {
     setFilteredData(filtered);
   };
 
+  const handleViewDetails = (student) => {
+    setSelectedStudent(student);
+  };
+
+  const handleCloseDetails = () => {
+    setSelectedStudent(null);
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto p-4 sm:p-6 bg-white rounded-lg">
-      <h1 className="text-2xl sm:text-3xl font-bold text-orange-600
-text-center mb-6">Student List</h1>
+    <div className="max-w-7xl mx-auto p-4 sm:p-6 bg-white rounded-lg shadow">
+      <h1 className="text-2xl sm:text-3xl font-bold text-orange-600 text-center mb-6">
+        Student Management
+      </h1>
 
       {/* Search Input */}
       <div className="mb-4 flex justify-end">
@@ -427,95 +388,121 @@ text-center mb-6">Student List</h1>
           placeholder="Search by Name"
           value={searchQuery}
           onChange={handleSearch}
-          className="border border-gray-300 rounded-md p-2 w-full
-max-w-xs focus:outline-none focus:ring focus:ring-orange-500"
+          className="p-2 border border-gray-300 rounded w-full max-w-xs focus:outline-none focus:ring focus:border-orange-500"
         />
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="table-auto w-full text-xs sm:text-sm">
-          <thead>
-            <tr className="bg-gray-200 text-gray-700">
-              <th className="px-2 py-3 text-center">ID</th>
-              <th className="px-2 py-3 text-center">Name</th>
-              <th className="px-2 py-3 text-center">Father Name</th>
-              <th className="px-2 py-3 text-center">Mother Name</th>
-              <th className="px-2 py-3 text-center">Email</th>
-              <th className="px-2 py-3 text-center">Contact No.</th>
-              <th className="px-2 py-3 text-center">Other Contact No.</th>
-              <th className="px-2 py-3 text-center">Gender</th>
-              <th className="px-2 py-3 text-center">Address</th>
-              <th className="px-2 py-3 text-center">Roll Number</th>
-              <th className="px-2 py-3 text-center">Course</th>
-              <th className="px-2 py-3 text-center">Year</th>
-              <th className="px-2 py-3 text-center">Total Present days</th>
-              <th className="px-2 py-3 text-center">Total Absent days</th>
-              <th className="px-2 py-3 text-center">Attendance Percentage</th>
-              <th className="px-2 py-3 text-center">1A Level</th>
-              <th className="px-2 py-3 text-center">1B Level</th>
-              <th className="px-2 py-3 text-center">1C Level</th>
-              <th className="px-2 py-3 text-center">2A Level</th>
-              <th className="px-2 py-3 text-center">2B Level</th>
-              <th className="px-2 py-3 text-center">2C Level</th>
-              <th className="px-2 py-3 text-center">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredData.map((item, index) => (
-              <tr key={item.id} className={index % 2 === 0 ?
-'bg-white' : 'bg-gray-100'}>
-                <td className="border px-2 py-3 text-center">{item.id}</td>
-                <td className="border px-2 py-3 text-center">{item.name}</td>
-                <td className="border px-2 py-3
-text-center">{item.fatherName}</td>
-                <td className="border px-2 py-3
-text-center">{item.motherName}</td>
-                <td className="border px-2 py-3 text-center">{item.email}</td>
-                <td className="border px-2 py-3 text-center">{item.phone}</td>
-                <td className="border px-2 py-3
-text-center">{item.otherPhone}</td>
-                <td className="border px-2 py-3 text-center">{item.gender}</td>
-                <td className="border px-2 py-3 text-center">{item.address}</td>
-                <td className="border px-2 py-3 text-center">{item.rollno}</td>
-                <td className="border px-2 py-3 text-center">{item.course}</td>
-                <td className="border px-2 py-3 text-center">{item.year}</td>
-                <td className="border px-2 py-3
-text-center">{item.totalpresent}</td>
-                <td className="border px-2 py-3
-text-center">{item.totalabsent}</td>
-                <td className="border px-2 py-3
-text-center">{item.attenpercentage}</td>
-                <td className="border px-2 py-3 text-center">{item.oneA}</td>
-                <td className="border px-2 py-3 text-center">{item.oneB}</td>
-                <td className="border px-2 py-3 text-center">{item.oneC}</td>
-                <td className="border px-2 py-3 text-center">{item.twoA}</td>
-                <td className="border px-2 py-3 text-center">{item.twoB}</td>
-                <td className="border px-2 py-3 text-center">{item.twoC}</td>
-                <td className="border px-2 py-3 text-center">
-                  <div className="flex justify-around space-x-2">
-                    <button
-                      onClick={() => editData(item)}
-                      className="bg-yellow-500 text-white px-2 py-1
-rounded-md hover:bg-yellow-600 transition duration-200 text-xs
-sm:text-sm"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => deleteData(item.id)}
-                      className="bg-red-500 text-white px-2 py-1
-rounded-md hover:bg-red-600 transition duration-200 text-xs
-sm:text-sm"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      {/* Card View */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredData.map((student) => (
+          <div
+            key={student.id}
+            className="p-4 rounded-lg shadow-md hover:shadow-lg transition duration-300 border border-gray-300 bg-gray-50"
+          >
+            <h2 className="text-xl font-semibold text-orange-600 mb-2">
+              {student.name}
+            </h2>
+            <p><strong>Roll No:</strong>  {student.rollno}</p>
+            <p><strong>Email: </strong> {student.email}</p>
+            <p><strong>Course: </strong> {student.course}</p>
+
+            <div className="flex justify-between mt-4">
+              <button
+                onClick={() => handleViewDetails(student)}
+                className="bg-gray-600 text-white px-3 py-1 rounded-md hover:bg-blue-600 text-sm"
+              >
+                View
+              </button>
+              <button
+                onClick={() => editData(student)}
+                className="bg-gray-600 text-white px-3 py-1 rounded-md hover:bg-yellow-600 text-sm"
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => deleteData(student.id)}
+                className="bg-gray-600 text-white px-3 py-1 rounded-md hover:bg-red-600 text-sm"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
+
+      {/* Modal for Viewing Details */}
+      {selectedStudent && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-11/12 max-w-2xl">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">
+              {selectedStudent.name}'s Details
+            </h2>
+            <div className="space-y-2">
+            <p className="text-sm text-gray-600">
+                <strong>Email:</strong> {selectedStudent.fatheremail}
+              </p>
+              <p className="text-sm text-gray-600">
+                <strong>Father's Name:</strong> {selectedStudent.fatherName}
+              </p>
+              <p className="text-sm text-gray-600">
+                <strong>Father Email:</strong> {selectedStudent.email}
+              </p>
+              <p className="text-sm text-gray-600">
+                <strong>Mother's Name:</strong> {selectedStudent.motherName}
+              </p>
+              <p className="text-sm text-gray-600">
+                <strong>Roll No:</strong> {selectedStudent.rollno}
+              </p>
+            
+              <p className="text-sm text-gray-600">
+                <strong>Contact No:</strong> {selectedStudent.phone}
+              </p>
+              <p className="text-sm text-gray-600">
+                <strong>Address:</strong> {selectedStudent.address}
+              </p>
+              <p className="text-sm text-gray-600">
+                <strong>Course:</strong> {selectedStudent.course}
+              </p>
+              <p className="text-sm text-gray-600">
+                <strong>Year:</strong> {selectedStudent.year}
+              </p>
+              <p className="text-sm text-gray-600">
+                <strong>Father's Name:</strong> {selectedStudent.fatherName}
+              </p>
+              <p className="text-sm text-gray-600">
+                <strong>Mother's Name:</strong> {selectedStudent.motherName}
+              </p>
+              <p className="text-sm text-gray-600">
+                <strong>Roll No:</strong> {selectedStudent.rollno}
+              </p>
+              <p className="text-sm text-gray-600">
+                <strong>Email:</strong> {selectedStudent.email}
+              </p>
+              <p className="text-sm text-gray-600">
+                <strong>Contact No:</strong> {selectedStudent.phone}
+              </p>
+              <p className="text-sm text-gray-600">
+                <strong>Address:</strong> {selectedStudent.address}
+              </p>
+              <p className="text-sm text-gray-600">
+                <strong>Course:</strong> {selectedStudent.course}
+              </p>
+              <p className="text-sm text-gray-600">
+                <strong>Year:</strong> {selectedStudent.year}
+              </p>
+            </div>
+
+            <div className="flex justify-end mt-4">
+              <button
+                onClick={handleCloseDetails}
+                className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 text-sm"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

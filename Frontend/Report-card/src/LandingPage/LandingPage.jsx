@@ -15,7 +15,7 @@ function LandingPage() {
         <div className="bg-white container mx-auto rounded-lg shadow-lg p-8 transition-all duration-300">
           {/* Centered Heading */}
           <h1 className="text-5xl font-extrabold text-center mb-12">
-            Report Card Generation Made Easy
+            Report Card Genrator Made Easy
           </h1>
 
           {/* Main Section */}

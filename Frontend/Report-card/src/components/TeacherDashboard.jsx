@@ -26,6 +26,11 @@ const TeacherDashboard = () => {
               View Report Card
             </Link>
           </li>
+          <li>
+            <Link to="/upload" className="text-blue-500 font-semibold hover:text-blue-700 transition">
+              Upload Excel File
+            </Link>
+          </li>
         </ul>
       </nav>
 

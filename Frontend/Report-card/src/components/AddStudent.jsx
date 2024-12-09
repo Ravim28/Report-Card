@@ -9,6 +9,8 @@ const validationSchema = Yup.object({
   name: Yup.string().required('Name is required'),
   fatherName: Yup.string().required('Father Name is required'),
   motherName: Yup.string().required('Mother Name is required'),
+  fatheremail: Yup.string().email('Invalid email address').required('Email is required'),
+
   email: Yup.string().email('Invalid email address').required('Email is required'),
   phone: Yup.string().matches(/^\d{10}$/, 'Phone must be 10 digits').required('Contact number is required'),
   otherPhone: Yup.string().matches(/^\d{10}$/, 'Other phone must be 10 digits').required('Other contact number is required'),
@@ -25,6 +27,10 @@ const validationSchema = Yup.object({
     .typeError('Total Absent days must be a number')
     .min(0, 'Total Absent days must be at least 0')
     .required('Total Absent days is required'),
+    totalday: Yup.number()
+    .typeError('Total  days must be a number')
+    .min(0, 'Total days must be at least 0')
+    .required('Total days is required'),
   attenpercentage: Yup.number()
     .typeError('Attendance Percentage must be a number')
     .min(0, 'Attendance Percentage cannot be less than 0')
@@ -47,6 +53,8 @@ const AddStudent = () => {
     initialValues: {
       name: student?.name || '',
       fatherName: student?.fatherName || '',
+      fatheremail: student?.fatheremail || '',
+
       motherName: student?.motherName || '',
       email: student?.email || '',
       phone: student?.phone || '',
@@ -58,6 +66,8 @@ const AddStudent = () => {
       year: student?.year || '',
       totalpresent: student?.totalpresent || '',
       totalabsent: student?.totalabsent || '',
+      totalday: student?.totalday || '',
+
       attenpercentage: student?.attenpercentage || '',
       oneA: student?.oneA || '',
       oneB: student?.oneB || '',
@@ -78,6 +88,7 @@ const AddStudent = () => {
         alert("successfully student aadded");
         // navigate('/login'); // Redirects back to the student table
       } catch (error) {
+        alert("this emaili is not a valid email")
         console.error("Error submitting data", error);
         // Handle error if needed
       }
@@ -125,6 +136,22 @@ const AddStudent = () => {
             )}
           </div>
 
+
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">Student Email</label>
+            <input
+              type="email"
+              name="fatheremail"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.fatheremail}
+              className={`p-2 w-full rounded-md border ${formik.touched.fatheremail && formik.errors.fatheremail ? 'border-red-500' : 'border-gray-300'}`}
+            />
+            {formik.touched.fatheremail && formik.errors.fatheremail && (
+              <div className="text-red-500 text-sm">{formik.errors.fatheremail}</div>
+            )}
+          </div>
+
           {/* Mother Name Field */}
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">Mother Name</label>
@@ -143,7 +170,7 @@ const AddStudent = () => {
 
           {/* Email Field */}
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Email</label>
+            <label className="block text-gray-700 text-sm font-bold mb-2"> father Email</label>
             <input
               type="email"
               name="email"
@@ -228,7 +255,7 @@ const AddStudent = () => {
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">Roll Number</label>
             <input
-              type="text"
+              type="number"
               name="rollno"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -242,39 +269,53 @@ const AddStudent = () => {
 
           {/* Course Field */}
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Course</label>
-            <input
-              type="text"
-              name="course"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.course}
-              className={`p-2 w-full rounded-md border ${formik.touched.course && formik.errors.course ? 'border-red-500' : 'border-gray-300'}`}
-            />
-            {formik.touched.course && formik.errors.course && (
-              <div className="text-red-500 text-sm">{formik.errors.course}</div>
-            )}
-          </div>
+  <label className="block text-gray-700 text-sm font-bold mb-2">Course</label>
+  <select
+    name="course"
+    onChange={formik.handleChange}
+    onBlur={formik.handleBlur}
+    value={formik.values.course}
+    className={`p-2 w-full rounded-md border ${formik.touched.course && formik.errors.course ? 'border-red-500' : 'border-gray-300'}`}
+  >
+    <option value="" disabled>
+      Select a course
+    </option>
+    <option value="BCA+ITEG">BCA + ITEG</option>
+    <option value="BBA+ITEG">BBA + ITEG</option>
+    <option value="DIPLOMA ITEG">Diploma ITEG</option>
+    <option value="Bsc+ITEG">Bsc + ITEG</option>
+  </select>
+  {formik.touched.course && formik.errors.course && (
+    <div className="text-red-500 text-sm">{formik.errors.course}</div>
+  )}
+</div>
+
 
           {/* Year Field */}
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Year</label>
-            <input
-              type="text"
-              name="year"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.year}
-              className={`p-2 w-full rounded-md border ${formik.touched.year && formik.errors.year ? 'border-red-500' : 'border-gray-300'}`}
-            />
-            {formik.touched.year && formik.errors.year && (
-              <div className="text-red-500 text-sm">{formik.errors.year}</div>
-            )}
-          </div>
+    {/* Year Field */}
+<div className="mb-4">
+  <label className="block text-gray-700 text-sm font-bold mb-2">Year</label>
+  <select
+    name="year"
+    onChange={formik.handleChange}
+    onBlur={formik.handleBlur}
+    value={formik.values.year}
+    className={`p-2 w-full rounded-md border ${formik.touched.year && formik.errors.year ? 'border-red-500' : 'border-gray-300'}`}
+  >
+    <option value="" disabled>Select Year</option>
+    <option value="1 Year">1 Year</option>
+    <option value="2 Year">2 Year</option>
+    <option value="3 Year">3 Year</option>
+    <option value="4 Year">4 Year</option>
+  </select>
+  {formik.touched.year && formik.errors.year && (
+    <div className="text-red-500 text-sm">{formik.errors.year}</div>
+  )}
+</div>
+
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Attendance Fields */}
+      {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">Total Present</label>
             <input
@@ -306,6 +347,21 @@ const AddStudent = () => {
           </div>
 
           <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">Total days</label>
+            <input
+              type="number"
+              name="totalday"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.totalday}
+              className={`p-2 w-full rounded-md border ${formik.touched.totalday && formik.errors.totalday ? 'border-red-500' : 'border-gray-300'}`}
+            />
+            {formik.touched.totalday && formik.errors.totalday && (
+              <div className="text-red-500 text-sm">{formik.errors.totalday}</div>
+            )}
+          </div>
+
+          <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">Attendance Percentage</label>
             <input
               type="number"
@@ -319,104 +375,224 @@ const AddStudent = () => {
               <div className="text-red-500 text-sm">{formik.errors.attenpercentage}</div>
             )}
           </div>
-        </div>
+        </div>   */}
+
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+  {/* Total Present */}
+  <div className="mb-4">
+    <label className="block text-gray-700 text-sm font-bold mb-2">Total Present</label>
+    <input
+      type="number"
+      name="totalpresent"
+      onChange={(e) => {
+        const value = e.target.value;
+        formik.setFieldValue("totalpresent", value);
+        if (formik.values.totalday) {
+          const percentage = ((value / formik.values.totalday) * 100).toFixed(2);
+          formik.setFieldValue("attenpercentage", percentage);
+        }
+      }}
+      onBlur={formik.handleBlur}
+      value={formik.values.totalpresent}
+      className={`p-2 w-full rounded-md border ${
+        formik.touched.totalpresent && formik.errors.totalpresent ? "border-red-500" : "border-gray-300"
+      }`}
+    />
+    {formik.touched.totalpresent && formik.errors.totalpresent && (
+      <div className="text-red-500 text-sm">{formik.errors.totalpresent}</div>
+    )}
+  </div>
+
+  {/* Total Absent */}
+  <div className="mb-4">
+    <label className="block text-gray-700 text-sm font-bold mb-2">Total Absent</label>
+    <input
+      type="number"
+      name="totalabsent"
+      onChange={formik.handleChange}
+      onBlur={formik.handleBlur}
+      value={formik.values.totalabsent}
+      className={`p-2 w-full rounded-md border ${
+        formik.touched.totalabsent && formik.errors.totalabsent ? "border-red-500" : "border-gray-300"
+      }`}
+    />
+    {formik.touched.totalabsent && formik.errors.totalabsent && (
+      <div className="text-red-500 text-sm">{formik.errors.totalabsent}</div>
+    )}
+  </div>
+
+  {/* Total Days */}
+  <div className="mb-4">
+    <label className="block text-gray-700 text-sm font-bold mb-2">Total Days</label>
+    <input
+      type="number"
+      name="totalday"
+      onChange={(e) => {
+        const value = e.target.value;
+        formik.setFieldValue("totalday", value);
+        if (formik.values.totalpresent) {
+          const percentage = ((formik.values.totalpresent / value) * 100).toFixed(2);
+          formik.setFieldValue("attenpercentage", percentage);
+        }
+      }}
+      onBlur={formik.handleBlur}
+      value={formik.values.totalday}
+      className={`p-2 w-full rounded-md border ${
+        formik.touched.totalday && formik.errors.totalday ? "border-red-500" : "border-gray-300"
+      }`}
+    />
+    {formik.touched.totalday && formik.errors.totalday && (
+      <div className="text-red-500 text-sm">{formik.errors.totalday}</div>
+    )}
+  </div>
+
+  {/* Attendance Percentage */}
+  <div className="mb-4">
+    <label className="block text-gray-700 text-sm font-bold mb-2">Attendance Percentage</label>
+    <input
+      type="number"
+      name="attenpercentage"
+      readOnly
+      value={formik.values.attenpercentage}
+      className="p-2 w-full rounded-md border border-gray-300 bg-gray-100"
+    />
+    {formik.touched.attenpercentage && formik.errors.attenpercentage && (
+      <div className="text-red-500 text-sm">{formik.errors.attenpercentage}</div>
+    )}
+  </div>
+</div>
+
+
+
+
+
+
+
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* 1A Level Field */}
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">1A Level</label>
-            <input
-              type="text"
-              name="oneA"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.oneA}
-              className={`p-2 w-full rounded-md border ${formik.touched.oneA && formik.errors.oneA ? 'border-red-500' : 'border-gray-300'}`}
-            />
-            {formik.touched.oneA && formik.errors.oneA && (
-              <div className="text-red-500 text-sm">{formik.errors.oneA}</div>
-            )}
-          </div>
+    <label className="block text-gray-700 text-sm font-bold mb-2">1A Level</label>
+    <select
+      name="oneA"
+      onChange={formik.handleChange}
+      onBlur={formik.handleBlur}
+      value={formik.values.oneA}
+      className={`p-2 w-full rounded-md border ${formik.touched.oneA && formik.errors.oneA ? 'border-red-500' : 'border-gray-300'}`}
+    >
+      <option value="" disabled>Select Status</option>
+      <option value="Pending">Pending</option>
+      <option value="Running">Running</option>
+      <option value="Clear">Clear</option>
+    </select>
+    {formik.touched.oneA && formik.errors.oneA && (
+      <div className="text-red-500 text-sm">{formik.errors.oneA}</div>
+    )}
+  </div>
 
           {/* 1B Level Field */}
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">1B Level</label>
-            <input
-              type="text"
-              name="oneB"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.oneB}
-              className={`p-2 w-full rounded-md border ${formik.touched.oneB && formik.errors.oneB ? 'border-red-500' : 'border-gray-300'}`}
-            />
-            {formik.touched.oneB && formik.errors.oneB && (
-              <div className="text-red-500 text-sm">{formik.errors.oneB}</div>
-            )}
-          </div>
+  <label className="block text-gray-700 text-sm font-bold mb-2">1B Level</label>
+  <select
+    name="oneB"
+    onChange={formik.handleChange}
+    onBlur={formik.handleBlur}
+    value={formik.values.oneB}
+    className={`p-2 w-full rounded-md border ${formik.touched.oneB && formik.errors.oneB ? 'border-red-500' : 'border-gray-300'}`}
+  >
+    <option value="" disabled>Select Status</option>
+    <option value="Pending">Pending</option>
+    <option value="Running">Running</option>
+    <option value="Clear">Clear</option>
+  </select>
+  {formik.touched.oneB && formik.errors.oneB && (
+    <div className="text-red-500 text-sm">{formik.errors.oneB}</div>
+  )}
+</div>
+
 
           {/* 1C Level Field */}
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">1C Level</label>
-            <input
-              type="text"
-              name="oneC"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.oneC}
-              className={`p-2 w-full rounded-md border ${formik.touched.oneC && formik.errors.oneC ? 'border-red-500' : 'border-gray-300'}`}
-            />
-            {formik.touched.oneC && formik.errors.oneC && (
-              <div className="text-red-500 text-sm">{formik.errors.oneC}</div>
-            )}
-          </div>
+  <label className="block text-gray-700 text-sm font-bold mb-2">1C Level</label>
+  <select
+    name="oneC"
+    onChange={formik.handleChange}
+    onBlur={formik.handleBlur}
+    value={formik.values.oneC}
+    className={`p-2 w-full rounded-md border ${formik.touched.oneC && formik.errors.oneC ? 'border-red-500' : 'border-gray-300'}`}
+  >
+    <option value="" disabled>Select Status</option>
+    <option value="Pending">Pending</option>
+    <option value="Running">Running</option>
+    <option value="Clear">Clear</option>
+  </select>
+  {formik.touched.oneC && formik.errors.oneC && (
+    <div className="text-red-500 text-sm">{formik.errors.oneC}</div>
+  )}
+</div>
+
 
           {/* 2A Level Field */}
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">2A Level</label>
-            <input
-              type="text"
-              name="twoA"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.twoA}
-              className={`p-2 w-full rounded-md border ${formik.touched.twoA && formik.errors.twoA ? 'border-red-500' : 'border-gray-300'}`}
-            />
-            {formik.touched.twoA && formik.errors.twoA && (
-              <div className="text-red-500 text-sm">{formik.errors.twoA}</div>
-            )}
-          </div>
+  <label className="block text-gray-700 text-sm font-bold mb-2">2A Level</label>
+  <select
+    name="twoA"
+    onChange={formik.handleChange}
+    onBlur={formik.handleBlur}
+    value={formik.values.twoA}
+    className={`p-2 w-full rounded-md border ${formik.touched.twoA && formik.errors.twoA ? 'border-red-500' : 'border-gray-300'}`}
+  >
+    <option value="" disabled>Select Status</option>
+    <option value="Pending">Pending</option>
+    <option value="Running">Running</option>
+    <option value="Clear">Clear</option>
+  </select>
+  {formik.touched.twoA && formik.errors.twoA && (
+    <div className="text-red-500 text-sm">{formik.errors.twoA}</div>
+  )}
+</div>
 
-          {/* 2B Level Field */}
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">2B Level</label>
-            <input
-              type="text"
-              name="twoB"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.twoB}
-              className={`p-2 w-full rounded-md border ${formik.touched.twoB && formik.errors.twoB ? 'border-red-500' : 'border-gray-300'}`}
-            />
-            {formik.touched.twoB && formik.errors.twoB && (
-              <div className="text-red-500 text-sm">{formik.errors.twoB}</div>
-            )}
-          </div>
+{/* 2B Level Field */}
+<div className="mb-4">
+  <label className="block text-gray-700 text-sm font-bold mb-2">2B Level</label>
+  <select
+    name="twoB"
+    onChange={formik.handleChange}
+    onBlur={formik.handleBlur}
+    value={formik.values.twoB}
+    className={`p-2 w-full rounded-md border ${formik.touched.twoB && formik.errors.twoB ? 'border-red-500' : 'border-gray-300'}`}
+  >
+    <option value="" disabled>Select Status</option>
+    <option value="Pending">Pending</option>
+    <option value="Running">Running</option>
+    <option value="Clear">Clear</option>
+  </select>
+  {formik.touched.twoB && formik.errors.twoB && (
+    <div className="text-red-500 text-sm">{formik.errors.twoB}</div>
+  )}
+</div>
 
-          {/* 2C Level Field */}
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">2C Level</label>
-            <input
-              type="text"
-              name="twoC"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.twoC}
-              className={`p-2 w-full rounded-md border ${formik.touched.twoC && formik.errors.twoC ? 'border-red-500' : 'border-gray-300'}`}
-            />
-            {formik.touched.twoC && formik.errors.twoC && (
-              <div className="text-red-500 text-sm">{formik.errors.twoC}</div>
-            )}
-          </div>
+{/* 2C Level Field */}
+<div className="mb-4">
+  <label className="block text-gray-700 text-sm font-bold mb-2">2C Level</label>
+  <select
+    name="twoC"
+    onChange={formik.handleChange}
+    onBlur={formik.handleBlur}
+    value={formik.values.twoC}
+    className={`p-2 w-full rounded-md border ${formik.touched.twoC && formik.errors.twoC ? 'border-red-500' : 'border-gray-300'}`}
+  >
+    <option value="" disabled>Select Status</option>
+    <option value="Pending">Pending</option>
+    <option value="Running">Running</option>
+    <option value="Clear">Clear</option>
+  </select>
+  {formik.touched.twoC && formik.errors.twoC && (
+    <div className="text-red-500 text-sm">{formik.errors.twoC}</div>
+  )}
+</div>
+
         </div>
 
         {/* Submit Button */}

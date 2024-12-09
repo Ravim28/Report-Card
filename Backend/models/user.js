@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
   password: String,
   role: { type: String, enum: ['SuperAdmin', 'Teacher', 'Student'] },
   status: { type: String, default: 'Pending' }, // Pending, Accepted, Rejected
-  requestType: { type: String, enum: ['Teacher', 'Student'], default: 'Student' }, // This field indicates the request type
+  // requestType: { type: String, enum: ['Teacher', 'Student'], default: 'Student' }, // This field indicates the request type
 });
 
 // Check if the model has already been compiled

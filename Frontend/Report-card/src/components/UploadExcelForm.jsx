@@ -170,7 +170,7 @@ const UploadExcelForm = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
+    <div className="flex justify-center items-center h-screen bg-gray-100 mb-0">
       <form
         onSubmit={handleSubmit}
         className="bg-white shadow-md rounded-lg px-8 py-6 w-full max-w-md"

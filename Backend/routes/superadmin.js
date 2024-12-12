@@ -7,7 +7,7 @@ const nodemailer = require('nodemailer');
 // Route to get all pending teacher requests (for Super Admin)
 router.get('/pending-teacher-requests', async (req, res) => {
   try {
-    const pendingTeachers = await User.find({ status: 'Pending', role: 'Teacher' });
+    const pendingTeachers = await User.find({ status: 'Pending' , role: 'Teacher'});
     console.log(pendingTeachers); // Log the result
     res.status(200).json(pendingTeachers);
   } catch (error) {
@@ -67,7 +67,7 @@ const transporter = nodemailer.createTransport({
 router.put('/approve/:id', async (req, res) => {
   try {
     const teacher = await User.findById(req.params.id);
-    if (!teacher || teacher.role !== 'Teacher') {
+    if (!teacher ||  teacher.role !== 'Teacher') {
       return res.status(404).json({ message: 'Teacher not found' });
     }
 
@@ -93,7 +93,7 @@ router.put('/approve/:id', async (req, res) => {
 router.put('/reject/:id', async (req, res) => {
   try {
     const teacher = await User.findById(req.params.id);
-    if (!teacher || teacher.role !== 'Teacher') {
+    if (!teacher ||  teacher.role !== 'Teacher') {
       return res.status(404).json({ message: 'Teacher not found' });
     }
 
@@ -119,7 +119,7 @@ router.put('/reject/:id', async (req, res) => {
 // Route to fetch approved teachers
 router.get('/approved-teachers', async (req, res) => {
   try {
-    const approvedTeachers = await User.find({ status: 'Accepted', role: 'Teacher' });
+    const approvedTeachers = await User.find({ status: 'accepted' , role: 'Teacher'});
     res.status(200).json(approvedTeachers);
   } catch (error) {
     console.error(error);
@@ -130,7 +130,7 @@ router.get('/approved-teachers', async (req, res) => {
 // Route to fetch rejected teachers
 router.get('/rejected-teachers', async (req, res) => {
   try {
-    const rejectedTeachers = await User.find({ status: 'Rejected', role: 'Teacher' });
+    const rejectedTeachers = await User.find({ status: 'rejected', role: 'Teacher' });
     res.status(200).json(rejectedTeachers);
   } catch (error) {
     console.error(error);

@@ -20,6 +20,8 @@ import ResetPassword from './components/ResetPassword';
 import TeacherStatus from './components/TeacherStatus';
 import UploadExcelForm from './components/UploadExcelForm';
 import PasswordRecovery from './components/PasswordRecovery';
+import AcceptRequest from './components/AcceptRequest';
+import RejectRequest from './components/RejectRequest';
 
 function App() {
   return (
@@ -37,15 +39,18 @@ function App() {
 
         {/* Protected Route for Super Admin */}
         <Route
-          path="/superadmin-dashboard"
+          path="/superadmin-dashboard/*"
           element={
             <ProtectedRoute role="SuperAdmin">
               <SuperadminDas />
+  
               {/* <Route path="/teacher-status" element={<TeacherStatus/>} /> */}
             </ProtectedRoute>
           }
         />
-              <Route path="/teacher-status" element={<TeacherStatus/>} />
+          <Route path="pending-requests" element={<AcceptRequest/>} />
+                <Route path="users" element={<RejectRequest/>} />
+              {/* <Route path="/teacher-status" element={<TeacherStatus/>} /> */}
 
         {/* Protected Route for Teacher */}
         <Route
@@ -61,12 +66,13 @@ function App() {
           <Route path="manage-students" element={<StudentTable />} />
           
           <Route path="view-students" element={<GenReportCard/>} />
+          <Route path="upload" element={<UploadExcelForm/>} />
 
 
 
 
         </Route>
-    <Route path="/upload" element={<UploadExcelForm/>} />
+    {/* <Route path="/upload" element={<UploadExcelForm/>} /> */}
         {/* Route for Editing Student */}
         <Route path="/edit-students" element={<EditStudentForm />} />
         {/* <Route path="/view-report/:id" element={<ViewReportCard/>} /> */}

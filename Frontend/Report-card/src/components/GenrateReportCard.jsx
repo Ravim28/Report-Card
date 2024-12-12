@@ -297,7 +297,7 @@ const GenReportCard = () => {
   const createPDFBlob = async (student) =>
     pdf(
       <Document>
-               <Page style={styles.page} size={{ width: 400, height: 500 }}>
+               <Page style={styles.page} size={{ width: 500, height: 500 }}>
                  {/* Logo */}
                  <Image style={styles.logo} src={logo} />
                 

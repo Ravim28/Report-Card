@@ -17,7 +17,7 @@ const TeacherHome = () => {
           <p className="text-gray-600 mb-6">Click here to add a new student to your class.</p>
           <button 
             onClick={() => navigate("/teacher-dashboard/add-student")} 
-            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition"
+            className="bg-skyblue font-semibold text-white py-2 px-4 rounded-md hover:bg-blue-600 transition"
           >
             Go to Add Student
           </button>
@@ -29,7 +29,7 @@ const TeacherHome = () => {
           <p className="text-gray-600 mb-6">Manage existing students, update details, or remove them.</p>
           <button 
             onClick={() => navigate("/teacher-dashboard/manage-students")} 
-            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition"
+            className="bg-skyblue font-semibold text-white py-2 px-4 rounded-md hover:bg-blue-600 transition"
           >
             Manage Students
           </button>
@@ -41,7 +41,7 @@ const TeacherHome = () => {
           <p className="text-gray-600 mb-6">Generate and view student report cards.</p>
           <button 
             onClick={() => navigate("/teacher-dashboard/view-students")} 
-            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition"
+            className="bg-skyblue font-semibold text-white py-2 px-4 rounded-md hover:bg-blue-600 transition"
           >
             View Report Cards
           </button>
@@ -53,7 +53,7 @@ const TeacherHome = () => {
           <p className="text-gray-600 mb-6">Upload student data using an Excel file.</p>
           <button 
             onClick={() => navigate("/teacher-dashboard/upload")} 
-            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition"
+            className="bg-skyblue font-semibold text-white py-2 px-4 rounded-md hover:bg-blue-600 transition"
           >
             Upload File
           </button>

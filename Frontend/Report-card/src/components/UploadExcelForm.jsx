@@ -170,7 +170,8 @@ const UploadExcelForm = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100 mb-0">
+    <>
+    <div className="flex justify-center items-center h-[60vh] bg-gray-100">
       <form
         onSubmit={handleSubmit}
         className="bg-white shadow-md rounded-lg px-8 py-6 w-full max-w-md"
@@ -190,18 +191,19 @@ const UploadExcelForm = () => {
         <button
           type="button"
           onClick={() => navigate('/teacher-dashboard')}
-          className="w-full bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-lg hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-200 mb-2"
+          className="w-full bg-skyblue text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-200 mb-2"
         >
           Back
         </button>
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="w-full bg-skyblue text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
         >
           Upload Excel
         </button>
       </form>
     </div>
+    </>
   );
 };
 
